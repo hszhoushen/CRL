@@ -18,6 +18,7 @@ from .kl_matching_postprocessor import KLMatchingPostprocessor
 from .knn_postprocessor import KNNPostprocessor
 from .maxlogit_postprocessor import MaxLogitPostprocessor
 from .mcd_postprocessor import MCDPostprocessor
+from .mcm_postprocessor import MCMPostprocessor
 from .mds_postprocessor import MDSPostprocessor
 from .mds_ensemble_postprocessor import MDSEnsemblePostprocessor
 from .mos_postprocessor import MOSPostprocessor
@@ -37,4 +38,9 @@ from .utils import get_postprocessor
 from .vim_postprocessor import VIMPostprocessor
 from .rotpred_postprocessor import RotPredPostprocessor
 from .rankfeat_postprocessor import RankFeatPostprocessor
+<<<<<<< HEAD
 #from .gen_postprocessor import GENPostprocessor
+=======
+from .gen_postprocessor import GENPostprocessor
+from .nnguide_postprocessor import NNGuidePostprocessor
+>>>>>>> 555d879be07d977f6ccf091b559afd64b37fc6f2
