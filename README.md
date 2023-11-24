@@ -1,7 +1,7 @@
 # Class Relevance Learning
 
 
-| Please refer to the [OpenOOD](https://github.com/hszhoushen/CRL/blob/main/OpenOOD-README.md) ReadMe for the installation of pre-request and dataset for experiments.= |
+| Please refer to the [OpenOOD](https://github.com/hszhoushen/CRL/blob/main/OpenOOD-README.md) ReadMe for the installation of pre-request and dataset for experiments. |
 | ------------------------------------------------------------ |
 
 
