@@ -1,7 +1,7 @@
 # Class Relevance Learning
 
 
-| Please refer to the OpenOOD repository for the installation of pre-request and dataset for experiments. |
+| Please refer to the [OpenOOD](https://github.com/hszhoushen/CRL/blob/main/OpenOOD-README.md) ReadMe for the installation of pre-request and dataset for experiments.= |
 | ------------------------------------------------------------ |
 
 
@@ -18,10 +18,11 @@ sh scripts/ood/crl/cifar10_test_ood_crl.sh
 
 
 
+
+
 ## Citation
 If you find our repository useful for your research, please consider citing our paper:
 ```bibtex
 
 ```
-
 
