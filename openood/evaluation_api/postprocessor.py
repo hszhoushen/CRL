@@ -14,7 +14,8 @@ from openood.postprocessors import (
     SSDPostprocessor, TemperatureScalingPostprocessor, VIMPostprocessor,
     RotPredPostprocessor, RankFeatPostprocessor, RMDSPostprocessor,
     SHEPostprocessor, CIDERPostprocessor, NPOSPostprocessor,
-    GENPostprocessor)
+    #GENPostprocessor, CRLPostprocessor)
+     CRLPostprocessor)
 from openood.utils.config import Config, merge_configs
 
 postprocessors = {
@@ -56,7 +57,8 @@ postprocessors = {
     'rd4ad': Rd4adPostprocessor,
     'rotpred': RotPredPostprocessor,
     'rankfeat': RankFeatPostprocessor,
-    'gen': GENPostprocessor
+#    'gen': GENPostprocessor,
+    'crl': CRLPostprocessor
 }
 
 link_prefix = 'https://raw.githubusercontent.com/Jingkang50/OpenOOD/main/configs/postprocessors/'
@@ -64,12 +66,14 @@ link_prefix = 'https://raw.githubusercontent.com/Jingkang50/OpenOOD/main/configs
 
 def get_postprocessor(config_root: str, postprocessor_name: str,
                       id_data_name: str):
+    print('postprocessor_name:', postprocessor_name)
+
     postprocessor_config_path = os.path.join(config_root, 'postprocessors',
                                              f'{postprocessor_name}.yml')
-    if not os.path.exists(postprocessor_config_path):
-        os.makedirs(os.path.dirname(postprocessor_config_path), exist_ok=True)
-        urllib.request.urlretrieve(link_prefix + f'{postprocessor_name}.yml',
-                                   postprocessor_config_path)
+    # if not os.path.exists(postprocessor_config_path):
+    #     os.makedirs(os.path.dirname(postprocessor_config_path), exist_ok=True)
+    #     urllib.request.urlretrieve(link_prefix + f'{postprocessor_name}.yml',
+    #                                postprocessor_config_path)
 
     config = Config(postprocessor_config_path)
     config = merge_configs(config,

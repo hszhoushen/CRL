@@ -6,6 +6,8 @@ import pandas as pd
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
+import numpy as np
+
 from tqdm import tqdm
 
 from openood.evaluators.metrics import compute_all_metrics
@@ -97,6 +99,7 @@ class Evaluator:
         if not isinstance(postprocessor, BasePostprocessor):
             raise TypeError(
                 'postprocessor should inherit BasePostprocessor in OpenOOD')
+        self.postprocessor_name = postprocessor_name
 
         # load data
         data_setup(data_root, id_name)
@@ -250,9 +253,16 @@ class Evaluator:
             if self.scores['id']['test'] is None:
                 print(f'Performing inference on {self.id_name} test set...',
                       flush=True)
-                id_pred, id_conf, id_gt = self.postprocessor.inference(
-                    self.net, self.dataloader_dict['id']['test'], progress)
+                print('self.postprocessor_name:', self.postprocessor_name)
+                id_pred, id_conf, id_gt = self.postprocessor.inference(self.net, self.dataloader_dict['id']['test'], progress)
+                print('id_conf:', type(id_conf), len(id_conf), id_conf)
+                
+                id_path = os.path.join('logits_file', self.postprocessor_name + '_id_conf.npy')
+                
+                np.save(id_path, id_conf)
+
                 self.scores['id']['test'] = [id_pred, id_conf, id_gt]
+
             else:
                 id_pred, id_conf, id_gt = self.scores['id']['test']
 
@@ -333,6 +343,12 @@ class Evaluator:
                       flush=True)
                 ood_pred, ood_conf, ood_gt = self.postprocessor.inference(
                     self.net, ood_dl, progress)
+
+                print('ood_pred:', type(ood_pred), len(ood_pred))
+                print('ood_conf:', type(ood_conf), len(ood_conf))
+                ood_path = os.path.join('logits_file', self.postprocessor_name + '_' + dataset_name + '_ood_conf.npy')
+                np.save(ood_path, ood_conf)
+                
                 self.scores['ood'][ood_split][dataset_name] = [
                     ood_pred, ood_conf, ood_gt
                 ]
@@ -341,8 +357,7 @@ class Evaluator:
                     'Inference has been performed on '
                     f'{dataset_name} dataset...',
                     flush=True)
-                [ood_pred, ood_conf,
-                 ood_gt] = self.scores['ood'][ood_split][dataset_name]
+                [ood_pred, ood_conf, ood_gt] = self.scores['ood'][ood_split][dataset_name]
 
             ood_gt = -1 * np.ones_like(ood_gt)  # hard set to -1 as ood
             pred = np.concatenate([id_pred, ood_pred])
@@ -353,6 +368,8 @@ class Evaluator:
             ood_metrics = compute_all_metrics(conf, label, pred)
             metrics_list.append(ood_metrics)
             self._print_metrics(ood_metrics)
+
+        
 
         print('Computing mean metrics...', flush=True)
         metrics_list = np.array(metrics_list)

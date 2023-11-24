@@ -1,6 +1,10 @@
 import os, sys
 ROOT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
+print('ROOT_DIR:', ROOT_DIR)
 sys.path.append(ROOT_DIR)
+openood_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'openood')
+sys.path.append(openood_dir)
+
 import numpy as np
 import pandas as pd
 import argparse
@@ -83,6 +87,10 @@ for subfolder in sorted(glob(os.path.join(root, 's*'))):
                 os.path.join(subfolder, 'postprocessors',
                              f'{postprocessor_name}.pkl'), 'rb') as f:
             postprocessor = pickle.load(f)
+        print('-------------------------------------------------------------------')
+        print(os.path.join(subfolder, 'postprocessors',f'{postprocessor_name}.pkl'))
+        print('-------------------------------------------------------------------')
+
     else:
         postprocessor = None
 

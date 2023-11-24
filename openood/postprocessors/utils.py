@@ -38,7 +38,7 @@ from .she_postprocessor import SHEPostprocessor
 from .temp_scaling_postprocessor import TemperatureScalingPostprocessor
 from .vim_postprocessor import VIMPostprocessor
 from .rts_postprocessor import RTSPostprocessor
-from .gen_postprocessor import GENPostprocessor
+#from .gen_postprocessor import GENPostprocessor
 
 
 def get_postprocessor(config: Config):
@@ -81,7 +81,8 @@ def get_postprocessor(config: Config):
         'rts': RTSPostprocessor,
         'rotpred': RotPredPostprocessor,
         'rankfeat': RankFeatPostprocessor,
-        'gen': GENPostprocessor
+        'gen': GENPostprocessor,
+        'crl': CRLPostprocessor
     }
 
     return postprocessors[config.postprocessor.name](config)

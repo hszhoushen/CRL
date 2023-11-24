@@ -13,6 +13,7 @@ from .gmm_postprocessor import GMMPostprocessor
 from .godin_postprocessor import GodinPostprocessor
 from .gradnorm_postprocessor import GradNormPostprocessor
 from .gram_postprocessor import GRAMPostprocessor
+from .crl_postprocessor import CRLPostprocessor
 from .kl_matching_postprocessor import KLMatchingPostprocessor
 from .knn_postprocessor import KNNPostprocessor
 from .maxlogit_postprocessor import MaxLogitPostprocessor
@@ -36,4 +37,4 @@ from .utils import get_postprocessor
 from .vim_postprocessor import VIMPostprocessor
 from .rotpred_postprocessor import RotPredPostprocessor
 from .rankfeat_postprocessor import RankFeatPostprocessor
-from .gen_postprocessor import GENPostprocessor
+#from .gen_postprocessor import GENPostprocessor
